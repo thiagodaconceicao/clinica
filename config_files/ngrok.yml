@@ -1,0 +1,8 @@
+version: 2
+
+authtoken: example 
+
+tunnels:
+  web:
+    addr: 5050
+    proto: http
