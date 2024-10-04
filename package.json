@@ -19,6 +19,8 @@
   "homepage": "https://github.com/thiagodaconceicao/clinica#readme",
   "dependencies": {
     "express": "^4.19.2",
-    "morgan": "^1.10.0"
+    "luxon": "^3.5.0",
+    "morgan": "^1.10.0",
+    "pg-promise": "^11.9.1"
   }
 }
