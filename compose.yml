@@ -9,9 +9,13 @@ services:
     networks:
       - project-net
 
+    environment:
+      POSTGRES_URL: ${POSTGRES_URL}
+
   postgres:
     image: postgres:16.4-alpine
-    container_name: postgresql
+    container_name: postgres
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
     volumes:
       - pg-data:/var/lib/postgres:rw
       - ./config_files/postgresql.conf:/etc/postgresql/postgresql.conf:ro
@@ -19,6 +23,9 @@ services:
 
     networks:
       - project-net
+
+    deploy:
+      endpoint_mode: dnsrr
 
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
