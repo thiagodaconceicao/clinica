@@ -37,6 +37,25 @@ webserver.post('/cadastro-endpoint', async (req, res) => {
 
 })
 
+webserver.post('/login-endpoint', async (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    try {
+        const usuarioValido = await verificarUsuario(email, password);
+        
+        if (usuarioValido) {
+            res.redirect('/boas-vindas');
+        } else {
+            res.status(401).send('E-mail ou senha incorretos.');
+        }
+    } catch (error) {
+        console.error('Erro ao verificar login:', error);
+        res.status(500).send('Erro no servidor.');
+    }
+});
+
+
 webserver.listen(port, () => {
     console.log('Server is running on port 5050');
 

@@ -31,8 +31,8 @@ async function inserirUsuario(email, password) {
 async function verificarUsuario(email, password) {
     try {
         const query = `
-            SELECT * FROM usuarios
-            WHERE email = $1 AND password = $2;
+            SELECT * FROM pacientes
+            WHERE email = $1 AND senha = $2;
         `;
         const result = await db.oneOrNone(query, [email, password]);
 
