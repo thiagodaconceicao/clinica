@@ -1,5 +1,5 @@
 CREATE TABLE clinica(
-id UUID PRIMARY key,
+id UUID DEFAULT gen_random_uuid() PRIMARY key,
 CNPJ VARCHAR(250) NOT NULL UNIQUE,
 nome VARCHAR(250) NOT NULL,
 endereco VARCHAR(250) NOT NULL,
@@ -10,19 +10,22 @@ atualizado_em TIMESTAMP
 );
 
 CREATE TABLE pacientes(
-id UUID PRIMARY key,
-id_clinica UUID references clinica(id) NOT NULL,
-CPF VARCHAR(11) NOT NULL UNIQUE,
-nome VARCHAR(250) NOT NULL,
-data_nascimento VARCHAR(250) NOT NULL,
-plano_de_saude BOOLEAN NOT NULL,
-ativo BOOLEAN NOT NULL,	
-criado_em TIMESTAMP NOT NULL,
-atualizado_em TIMESTAMP	
+id UUID DEFAULT gen_random_uuid() PRIMARY key,
+id_clinica UUID references clinica(id),
+CPF VARCHAR(11) UNIQUE,
+nome VARCHAR(250),
+email VARCHAR(250) UNIQUE,
+data_nascimento VARCHAR(250),
+plano_de_saude BOOLEAN,
+ativo BOOLEAN,	
+criado_em TIMESTAMP,
+atualizado_em TIMESTAMP,
+senha VARCHAR(250)
+
 );
 
 CREATE TABLE medicos(
-id UUID PRIMARY key,
+id UUID DEFAULT gen_random_uuid() PRIMARY key,
 id_clinica UUID references clinica(id) NOT NULL,
 CPF VARCHAR(11) NOT NULL UNIQUE,	
 CRO VARCHAR(11) NOT NULL UNIQUE,
@@ -35,7 +38,7 @@ atualizado_em TIMESTAMP
 );
 
 CREATE TABLE admins(
-id UUID PRIMARY key,
+id UUID DEFAULT gen_random_uuid() PRIMARY key,
 id_clinica UUID references clinica(id) NOT NULL,
 nome VARCHAR(250) NOT NULL,
 data_nascimento VARCHAR(250) NOT NULL,
@@ -47,7 +50,7 @@ atualizado_em TIMESTAMP
 );
 
 CREATE TABLE servicos_medicos(
-id UUID PRIMARY key,
+id UUID DEFAULT gen_random_uuid() PRIMARY key,
 nome VARCHAR(250) NOT NULL,
 descricao VARCHAR(250) NOT NULL,
 preco FLOAT NOT NULL,	
@@ -59,7 +62,7 @@ atualizado_em TIMESTAMP
 ); 
  
 CREATE TABLE pagamento(
-id UUID PRIMARY key,
+id UUID DEFAULT gen_random_uuid() PRIMARY key,
 id_servicos_medicos UUID REFERENCES servicos_medicos(id) NOT NULL,
 id_pacientes UUID REFERENCES pacientes(id) NOT NULL,
 valor_total FLOAT NOT NULL,
@@ -70,7 +73,7 @@ atualizado_em TIMESTAMP
 );
 
 CREATE TABLE atendimentos(
-id UUID PRIMARY key,
+id UUID DEFAULT gen_random_uuid() PRIMARY key,
 avaliacao VARCHAR(250) NOT NULL,
 id_medicos UUID REFERENCES medicos(id) NOT NULL,
 id_pacientes UUID REFERENCES pacientes(id) NOT NULL,
