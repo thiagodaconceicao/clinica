@@ -21,6 +21,10 @@ webserver.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'static/html/login.html'));
 })
 
+webserver.get('/inicio', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static/html/inicio.html'));
+})
+
 webserver.post('/cadastro-endpoint', async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -45,7 +49,7 @@ webserver.post('/login-endpoint', async (req, res) => {
         const usuarioValido = await verificarUsuario(email, password);
         
         if (usuarioValido) {
-            res.redirect('/boas-vindas');
+            res.redirect('/inicio');
         } else {
             res.status(401).send('E-mail ou senha incorretos.');
         }
