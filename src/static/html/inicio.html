@@ -1,20 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
 
+    <link rel="stylesheet" href="../css/sidebar.css">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
 </head>
 
 <body>
 
-    <input type="text" id="datepicker">
+    <div class="sidebar">
+        <a href="#relatorios">Relatórios</a>
+        <a href="#agenda">Agenda</a>
+    </div>
+
+    
+    <div class="content">
+        <h1>Escolha uma Data</h1>
+
+        
+        <input type="text" id="datepicker">
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+
+    
+    <script>
+        var picker = new Pikaday({
+            field: document.getElementById('datepicker'),
+            format: 'DD-MM-YYYY' // Formato da data
+        });
+    </script>
 
 </body>
-
-<script src="pikaday.js"></script>
-<script>
-    var picker = new Pikaday({ field: document.getElementById('datepicker') });
-</script>
-
 </html>

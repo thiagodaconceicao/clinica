@@ -8,6 +8,7 @@ const { inserirUsuario, verificarUsuario } = require('../db/login');
 
 webserver.use(morgan('dev'));
 webserver.use(express.urlencoded({ extended: true }));
+webserver.use(express.static(path.join(__dirname, 'static')));
 
 webserver.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'static/html/hello.html'));
