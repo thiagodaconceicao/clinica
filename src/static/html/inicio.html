@@ -6,36 +6,23 @@
     <title>Inicio</title>
 
     <link rel="stylesheet" href="../css/sidebar.css">
-
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
 </head>
 
 <body>
 
     <div class="sidebar">
+        <a href="/inicio">Início</a>
         <a href="#relatorios">Relatórios</a>
         <a href="#agenda">Agenda</a>
     </div>
-
     
-    <div class="content">
+    <div id="content" class="content">
         <h1>Escolha uma Data</h1>
-
-        
         <input type="text" id="datepicker">
     </div>
 
-    
     <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
     <script src="../javascript/sidebar.js"></script>
-
-    
-    <script>
-        var picker = new Pikaday({
-            field: document.getElementById('datepicker'),
-            format: 'DD-MM-YYYY' // Formato da data
-        });
-    </script>
-
 </body>
 </html>
