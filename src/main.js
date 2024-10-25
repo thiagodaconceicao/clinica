@@ -5,6 +5,7 @@ const port = 5050;
 const morgan = require('morgan');
 
 const { inserirUsuario, verificarUsuario } = require('../db/login');
+const { inserirConsulta } = require('../db/consult');
 
 webserver.use(morgan('dev'));
 webserver.use(express.urlencoded({ extended: true }));
@@ -65,6 +66,10 @@ webserver.post('/cadastro-teste', (req, res) => {
     const result = req.body.date;
     
     console.log(result);
+
+    inserirConsulta(result);
+
+    res.redirect('/inicio');
 
 });
 

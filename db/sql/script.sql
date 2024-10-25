@@ -74,17 +74,30 @@ atualizado_em TIMESTAMP
 
 CREATE TABLE atendimentos(
 id UUID DEFAULT gen_random_uuid() PRIMARY key,
-avaliacao VARCHAR(250) NOT NULL,
-id_medicos UUID REFERENCES medicos(id) NOT NULL,
-id_pacientes UUID REFERENCES pacientes(id) NOT NULL,
-id_servicos_medicos UUID  REFERENCES servicos_medicos(id) NOT NULL,
-id_pagamentos UUID REFERENCES pagamento(id) NOT NULL,
-id_admins UUID  REFERENCES admins(id) NOT NULL,
-id_clinica UUID references clinica(id) NOT NULL,
-horario_inicio TIME(0) NOT NULL,
-horario_fim TIME(0) NOT NULL,
-data_atendimento VARCHAR(250) NOT NULL,
-ativo BOOLEAN NOT NULL,
-criado_em TIMESTAMP NOT NULL,
-atualizado_em TIMESTAMP	
+avaliacao VARCHAR(250),
+id_medicos UUID REFERENCES medicos(id),
+id_pacientes UUID REFERENCES pacientes(id),
+id_servicos_medicos UUID  REFERENCES servicos_medicos(id),
+id_pagamentos UUID REFERENCES pagamento(id),
+id_admins UUID  REFERENCES admins(id),
+id_clinica UUID references clinica(id),
+horario_inicio TIME(0),
+horario_fim TIME(0),
+data_atendimento VARCHAR(250),
+ativo BOOLEAN,
+criado_em TIMESTAMP DEFAULT NOW(),
+atualizado_em TIMESTAMP	DEFAULT NOW()
 );
+
+CREATE OR REPLACE FUNCTION atualizar_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.atualizado_em = NOW();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_atualizacao
+BEFORE UPDATE ON atendimentos
+FOR EACH ROW
+EXECUTE FUNCTION atualizar_timestamp();
