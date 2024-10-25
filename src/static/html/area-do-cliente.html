@@ -1,18 +1,24 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Cadastro do Cliente</title>
-    </head>
-
-    <body>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro do Cliente</title>
+    <link rel="stylesheet" href="../css/cadastro.css">
+</head>
+<body>
+    <div class="cadastro-container">
+        <h1>Cadastro do Cliente</h1>
         <form action="/cadastro-endpoint" method="post">
-            <label for="email">Nome:</label><br>
-            <input type="text" id="email" name="email"><br>
 
-            <label for="password">Senha:</label><br>
-            <input type="password" id="password" name="password"><br> 
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
 
-            <input type="submit" value="Submit">
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" placeholder="Crie uma senha" required>
+
+            <input type="submit" value="Cadastrar">
         </form>
-    </body>
+    </div>
+</body>
 </html>
