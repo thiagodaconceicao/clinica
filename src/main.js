@@ -9,6 +9,7 @@ const { inserirUsuario, verificarUsuario } = require('../db/login');
 webserver.use(morgan('dev'));
 webserver.use(express.urlencoded({ extended: true }));
 webserver.use(express.static(path.join(__dirname, 'static')));
+webserver.use(express.json());
 
 webserver.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'static/html/hello.html'));
@@ -58,6 +59,13 @@ webserver.post('/login-endpoint', async (req, res) => {
         console.error('Erro ao verificar login:', error);
         res.status(500).send('Erro no servidor.');
     }
+});
+
+webserver.post('/cadastro-teste', (req, res) => {
+    const result = req.body.date;
+    
+    console.log(result);
+
 });
 
 
