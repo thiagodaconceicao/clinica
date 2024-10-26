@@ -67,17 +67,19 @@ webserver.post('/login-endpoint', async (req, res) => {
     }
 });
 
-webserver.post('/cadastro-teste', (req, res) => {
-    const result = req.body.date;
+webserver.post('/cadastro-teste', async (req, res) => {
+    const result = req.body.dateTime; // Corrigido para dateTime
     
     console.log(result);
 
-    inserirConsulta(result);
-
-    res.redirect('/dentista-consulta');
-
+    try {
+        await inserirConsulta(result);
+        res.json({ success: true, redirectUrl: '/dentista-consulta' });
+    } catch (error) {
+        console.error('Erro ao inserir consulta:', error);
+        res.status(500).json({ success: false, message: 'Erro ao processar a consulta.' });
+    }
 });
-
 
 webserver.listen(port, () => {
     console.log('Server is running on port 5050');

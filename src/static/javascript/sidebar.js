@@ -30,7 +30,11 @@ function loadContent(page) {
             })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
+                if (data.success) {
+                    window.location.href = data.redirectUrl;
+                } else {
+                    console.error('Erro:', data.message);
+                }
             })
             .catch((error) => {
                 console.error('Error:', error);
