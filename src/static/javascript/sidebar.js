@@ -7,31 +7,26 @@ function loadContent(page) {
         contentDiv.innerHTML = '<h1>Oi, você está na Agenda!</h1>';
     } else {
         contentDiv.innerHTML = `
-            <h1>Escolha uma Data</h1>
-            <input type="text" id="datepicker">
+            <h1>Escolha uma Data e Hora</h1>
+            <input type="text" id="datetimepicker">
             <button id="submitBtn">Enviar</button>
         `;
 
-        const picker = new Pikaday({
-            field: document.getElementById('datepicker'),
-            format: 'DD-MM-YYYY',
-            i18n: {
-            previousMonth: 'Mês Anterior',
-            nextMonth: 'Próximo Mês',
-            months: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-            weekdays: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
-            weekdaysShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb']
-            }
+        flatpickr("#datetimepicker", {
+            enableTime: true,
+            dateFormat: "d-m-Y H:i",
+            time_24hr: true,
+            locale: "pt"
         });
 
         document.getElementById('submitBtn').addEventListener('click', function() {
-            const selectedDate = document.getElementById('datepicker').value;
+            const selectedDateTime = document.getElementById('datetimepicker').value;
             fetch('/cadastro-teste', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ date: selectedDate })
+                body: JSON.stringify({ dateTime: selectedDateTime })
             })
             .then(response => response.json())
             .then(data => {
