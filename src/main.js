@@ -28,6 +28,11 @@ webserver.get('/inicio', (req, res) => {
     res.sendFile(path.join(__dirname, 'static/html/inicio.html'));
 })
 
+webserver.get('/dentista-consulta', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static/html/dentista.html'));
+
+})
+
 webserver.post('/cadastro-endpoint', async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -69,7 +74,7 @@ webserver.post('/cadastro-teste', (req, res) => {
 
     inserirConsulta(result);
 
-    res.redirect('/inicio');
+    res.redirect('/dentista-consulta');
 
 });
 
