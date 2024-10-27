@@ -1,30 +1,25 @@
-/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Estilo básico do body */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
 }
 
-/* Estilo do contêiner principal */
 .container {
     padding: 40px;
     text-align: center;
 }
 
-/* Estilo do título */
 h1 {
     font-size: 28px;
     color: #34495e;
     margin-bottom: 20px;
 }
 
-/* Estilo da lista de dentistas */
 .dentist-list {
     display: flex;
     flex-wrap: wrap;
@@ -32,7 +27,6 @@ h1 {
     gap: 20px;
 }
 
-/* Estilo do card do dentista */
 .dentist-card {
     width: 250px;
     background-color: #ffffff;
@@ -45,21 +39,19 @@ h1 {
 }
 
 .dentist-card.selected {
-    border-color: #27ae60; /* Borda verde para o dentista selecionado */
+    border-color: #27ae60;
 }
 
 .dentist-card:hover {
     transform: translateY(-5px);
 }
 
-/* Estilo da foto do dentista */
 .dentist-photo {
     width: 100%;
     height: 200px;
     object-fit: cover;
 }
 
-/* Estilo das informações do dentista */
 .dentist-info {
     padding: 15px;
 }
@@ -76,7 +68,6 @@ h1 {
     margin-bottom: 5px;
 }
 
-/* Estilo do botão de selecionar */
 .choose-button {
     width: 100%;
     padding: 10px;
@@ -93,7 +84,6 @@ h1 {
     background-color: #2980b9;
 }
 
-/* Estilo do contêiner de confirmação */
 .confirmation {
     display: none;
     margin-top: 20px;
@@ -101,7 +91,6 @@ h1 {
     color: #27ae60;
 }
 
-/* Estilo do botão de confirmação */
 #confirm-button {
     margin-top: 10px;
     padding: 10px 20px;
