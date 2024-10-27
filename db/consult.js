@@ -25,6 +25,23 @@ async function inserirConsulta(consulta) {
 }
 
 
+async function inserirAtendimento(nomeDentista) {
+    try {
+        const query = `
+            INSERT INTO atendimentos (nome_dentista_selecionado, data_atendimento, criado_em, atualizado_em)
+            VALUES ($1, NOW(), NOW(), NOW())
+            RETURNING id;
+        `;
+        const result = await db.one(query, [nomeDentista]);
+        console.log(`Atendimento inserido com sucesso, ID: ${result.id}`);
+        return result.id;
+    } catch (error) {
+        console.error('Erro ao inserir atendimento:', error);
+        throw error;
+    }
+}
+
 module.exports = {
-    inserirConsulta
+    inserirConsulta,
+    inserirAtendimento
 };

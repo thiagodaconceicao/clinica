@@ -5,7 +5,7 @@ const port = 5050;
 const morgan = require('morgan');
 
 const { inserirUsuario, verificarUsuario } = require('../db/login');
-const { inserirConsulta } = require('../db/consult');
+const { inserirConsulta, inserirAtendimento } = require('../db/consult');
 
 webserver.use(morgan('dev'));
 webserver.use(express.urlencoded({ extended: true }));
@@ -68,7 +68,7 @@ webserver.post('/login-endpoint', async (req, res) => {
 });
 
 webserver.post('/cadastro-teste', async (req, res) => {
-    const result = req.body.dateTime; // Corrigido para dateTime
+    const result = req.body.dateTime; 
     
     console.log(result);
 
@@ -78,6 +78,20 @@ webserver.post('/cadastro-teste', async (req, res) => {
     } catch (error) {
         console.error('Erro ao inserir consulta:', error);
         res.status(500).json({ success: false, message: 'Erro ao processar a consulta.' });
+    }
+});
+
+webserver.post('/dentista-selecao', async (req, res) => {
+    const { name } = req.body;  // Recebe o nome do dentista do frontend
+    if (!name) {
+        return res.status(400).json({ error: 'Nome do dentista é obrigatório' });
+    }
+
+    try {
+        const atendimentoId = await inserirAtendimento(name);
+        res.status(200).json({ message: 'Dentista selecionado com sucesso', atendimentoId });
+    } catch (error) {
+        res.status(500).json({ error: 'Erro ao registrar dentista selecionado' });
     }
 });
 

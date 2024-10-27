@@ -89,6 +89,16 @@ criado_em TIMESTAMP DEFAULT NOW(),
 atualizado_em TIMESTAMP	DEFAULT NOW()
 );
 
+CREATE TABLE logs (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    id_atendimento UUID REFERENCES atendimentos(id),
+    descricao TEXT NOT NULL,
+    criado_em TIMESTAMP DEFAULT NOW()
+);
+
+ALTER TABLE atendimentos
+ADD COLUMN nome_dentista_selecionado VARCHAR(250);
+
 CREATE OR REPLACE FUNCTION atualizar_timestamp()
 RETURNS TRIGGER AS $$
 BEGIN
