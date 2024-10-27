@@ -11,7 +11,7 @@
     <div class="container">
         <h1>Escolha um Dentista</h1>
         <div class="dentist-list">
-            <div class="dentist-card">
+            <div class="dentist-card" data-dentist="Dr. João da Silva">
                 <img src="../images/dentista1.jpg" alt="Foto do Dentista" class="dentist-photo">
                 <div class="dentist-info">
                     <h2>Dr. João da Silva</h2>
@@ -21,7 +21,7 @@
                     <button class="choose-button">Selecionar</button>
                 </div>
             </div>
-            <div class="dentist-card">
+            <div class="dentist-card" data-dentist="Dra. Maria Oliveira">
                 <img src="../images/dentista2.jpg" alt="Foto do Dentista" class="dentist-photo">
                 <div class="dentist-info">
                     <h2>Dra. Maria Oliveira</h2>
@@ -32,6 +32,11 @@
                 </div>
             </div>
         </div>
+        <div id="confirmation" class="confirmation">
+            <p>Você escolheu: <span id="selected-dentist"></span></p>
+            <button id="confirm-button">Confirmar Escolha</button>
+        </div>
     </div>
+    <script src="../javascript/dentista.js"></script>
 </body>
 </html>

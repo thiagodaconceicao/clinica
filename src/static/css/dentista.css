@@ -40,7 +40,12 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     text-align: left;
-    transition: transform 0.3s;
+    transition: transform 0.3s, border-color 0.3s;
+    border: 2px solid transparent;
+}
+
+.dentist-card.selected {
+    border-color: #27ae60; /* Borda verde para o dentista selecionado */
 }
 
 .dentist-card:hover {
@@ -86,4 +91,29 @@ h1 {
 
 .choose-button:hover {
     background-color: #2980b9;
+}
+
+/* Estilo do contêiner de confirmação */
+.confirmation {
+    display: none;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #27ae60;
+}
+
+/* Estilo do botão de confirmação */
+#confirm-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #27ae60;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#confirm-button:hover {
+    background-color: #1e8449;
 }
