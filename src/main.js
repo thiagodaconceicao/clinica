@@ -5,7 +5,7 @@ const port = 5050;
 const morgan = require('morgan');
 
 const { inserirUsuario, verificarUsuario } = require('../db/login');
-const { inserirConsulta, inserirAtendimento } = require('../db/consult');
+const { inserirConsulta, inserirAtendimento, buscarAtendimentos } = require('../db/consult');
 
 webserver.use(morgan('dev'));
 webserver.use(express.urlencoded({ extended: true }));
@@ -32,6 +32,16 @@ webserver.get('/dentista-consulta', (req, res) => {
     res.sendFile(path.join(__dirname, 'static/html/dentista.html'));
 
 })
+
+webserver.get('/get-list', async (req, res) => {
+    try {
+        const atendimentos = await buscarAtendimentos();
+        res.status(200).json(atendimentos);
+    } catch (error) {
+        console.error('Erro ao buscar atendimentos:', error);
+        res.status(500).json({ error: 'Erro ao buscar atendimentos' });
+    }
+});
 
 webserver.post('/cadastro-endpoint', async (req, res) => {
     const email = req.body.email;
