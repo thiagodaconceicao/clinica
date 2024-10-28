@@ -16,12 +16,24 @@ function loadContent(page) {
                 if (data.length > 0) {
                     consultationList.innerHTML = data.map(consulta => `
                         <div class="consultation-item">
-                            <p><strong>Data:</strong> ${consulta.data_atendimento}</p>
-                            <p><strong>Horário:</strong> ${consulta.horario_inicio} - ${consulta.horario_fim}</p>
+                            <p><strong>Horário e Data:</strong> ${consulta.data_atendimento}</p>
                             <p><strong>Paciente:</strong> ${consulta.nome_paciente}</p>
-                            <p><strong>Médico:</strong> ${consulta.nome_medico}</p>
+                            <p><strong>Médico:</strong> ${consulta.nome_dentista_selecionado}</p>
                         </div>
                     `).join('');
+                    document.querySelectorAll('.delete-btn').forEach(button => {
+                        button.addEventListener('click', function() {
+                            const consultaId = this.getAttribute('data-id');
+                            deleteConsulta(consultaId);
+                        });
+                    });
+
+                    document.querySelectorAll('.edit-btn').forEach(button => {
+                        button.addEventListener('click', function() {
+                            const consultaId = this.getAttribute('data-id');
+                            editConsulta(consultaId);
+                        });
+                    });
                 } else {
                     consultationList.innerHTML = '<p>Sem consultas agendadas.</p>';
                 }
