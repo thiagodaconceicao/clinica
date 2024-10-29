@@ -2,7 +2,7 @@ function loadContent(page) {
     const contentDiv = document.getElementById('content');
 
     if (page === 'relatorios') {
-        contentDiv.innerHTML = '<h1>Oi, você está nos Relatórios!</h1>';
+        contentDiv.innerHTML = '<h1>Parte do website em construção!</h1>';
     } else if (page === 'agenda') {
         contentDiv.innerHTML = `
             <h1>Agenda de Consultas</h1>

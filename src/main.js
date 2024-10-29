@@ -105,6 +105,30 @@ webserver.post('/dentista-selecao', async (req, res) => {
     }
 });
 
+webserver.delete('/delete-consulta/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        await db.none('DELETE FROM atendimentos WHERE id = $1', [id]);
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Erro ao excluir consulta:', error);
+        res.status(500).json({ success: false, message: 'Erro ao excluir consulta.' });
+    }
+});
+
+webserver.put('/edit-consulta/:id', async (req, res) => {
+    const id = req.params.id;
+    const newDateTime = req.body.dateTime;
+
+    try {
+        await db.none('UPDATE atendimentos SET data_atendimento = $1 WHERE id = $2', [newDateTime, id]);
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Erro ao editar consulta:', error);
+        res.status(500).json({ success: false, message: 'Erro ao editar consulta.' });
+    }
+});
+
 webserver.listen(port, () => {
     console.log('Server is running on port 5050');
 
