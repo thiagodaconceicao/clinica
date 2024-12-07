@@ -6,6 +6,8 @@ const morgan = require('morgan');
 
 const { inserirUsuario, verificarUsuario } = require('../db/login');
 const { inserirConsulta, inserirAtendimento, buscarAtendimentos } = require('../db/consult');
+const { gerarBoletoHTML } = require('../modules/boleto');
+
 
 webserver.use(morgan('dev'));
 webserver.use(express.urlencoded({ extended: true }));
@@ -92,7 +94,7 @@ webserver.post('/cadastro-teste', async (req, res) => {
 });
 
 webserver.post('/dentista-selecao', async (req, res) => {
-    const { name } = req.body;  // Recebe o nome do dentista do frontend
+    const { name } = req.body; 
     if (!name) {
         return res.status(400).json({ error: 'Nome do dentista é obrigatório' });
     }
@@ -104,6 +106,23 @@ webserver.post('/dentista-selecao', async (req, res) => {
         res.status(500).json({ error: 'Erro ao registrar dentista selecionado' });
     }
 });
+
+webserver.get('/gerar-boleto', async (req, res) => {
+    try {
+      const html = await gerarBoletoHTML();
+  
+      res.set({
+        'Content-Type': 'text/html',
+        'Content-Disposition': 'attachment; filename="boleto.html"',
+      });
+  
+      res.send(html);
+    } catch (error) {
+      console.error('Erro ao gerar o boleto:', error);
+      res.status(500).send('Erro ao gerar o boleto.');
+    }
+  });
+  
 
 webserver.delete('/delete-consulta/:id', async (req, res) => {
     const id = req.params.id;
