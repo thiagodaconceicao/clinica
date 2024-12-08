@@ -2,7 +2,30 @@ function loadContent(page) {
     const contentDiv = document.getElementById('content');
 
     if (page === 'relatorios') {
-        contentDiv.innerHTML = '<h1>Parte do website em construção!</h1>';
+        contentDiv.innerHTML = `
+            <h1>Parte do website em construção!</h1>
+            <button id="gerarBoletoBtn">Gerar Boleto</button>
+        `;
+
+        document.getElementById('gerarBoletoBtn').addEventListener('click', () => {
+            // Envia o GET para /gerar-boleto e força o download
+            fetch('/gerar-boleto')
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'boleto.html';
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    window.URL.revokeObjectURL(url);
+                })
+                .catch(error => {
+                    console.error("Erro ao gerar boleto:", error);
+                    alert("Erro ao gerar boleto. Tente novamente.");
+                });
+        });
     } else if (page === 'agenda') {
         contentDiv.innerHTML = `
             <h1>Agenda de Consultas</h1>
