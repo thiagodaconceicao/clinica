@@ -3,9 +3,9 @@ function loadContent(page) {
 
     if (page === 'relatorios') {
         contentDiv.innerHTML = `
-            <h1>Parte do website em construção!</h1>
-            <button id="gerarBoletoBtn">Gerar Boleto</button>
-        `;
+            <div class="button-container">
+                <button id="gerarBoletoBtn" class="styled-button">Gerar Boleto</button>
+            </div>        `;
 
         document.getElementById('gerarBoletoBtn').addEventListener('click', () => {
             // Envia o GET para /gerar-boleto e força o download
